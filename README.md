@@ -1,4 +1,4 @@
-# vscode-annotation README
+# vscode-annotation
 
 vscode-annotation is an extension for Visual Studio Code that will help you to add annotation in your code for identifying:
 . Refactor code   
@@ -41,6 +41,6 @@ This extension contributes the following settings:
 
 ### 1.0.0
 
-Initial release of vscode-annotations.
+Initial release of vscode-annotations.    
 . adding following annotations: `FIXME`, `REFACTOR` or `TODO`    
 . the extension will allow you to list the annotations in the "Annotations panel"    

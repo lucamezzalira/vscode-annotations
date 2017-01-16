@@ -5,7 +5,7 @@ var TRIM_SPACES_REGEX = "^[ ]+|[ ]+$"
 var FIXME_ID = "fixme_id"
 var REFACTOR_ID = "refactor_id"
 var TODO_ID = "todo_id"
-var PANEL_NAME = "Annotation"
+var PANEL_NAME = "Annotations"
 
 function RefactorAnnotation(){
      window = vscode.window;
@@ -17,18 +17,14 @@ function RefactorAnnotation(){
 }
 
 function analyseDoc(){
-    
     output = window.createOutputChannel(PANEL_NAME);
-    output.show(true);
-
     var activeEditor = window.activeTextEditor
     
     if(activeEditor){
         var doc = activeEditor.document;
 
-        if(doc.fileName.toLowerCase().indexOf("untitled") >= 0){
-            dispose()
-            return;
+        if(doc.languageId !== "javascript" || doc.fileName.toLowerCase().indexOf("untitled") >= 0){
+            return
         }
         
         var reKeys = new RegExp(KEYS_REGEX, "gmi");
@@ -91,7 +87,10 @@ function createOutput(doc, data, panel){
         lastType = value.type
     })
     
-    panel.appendLine("")
+    panel.appendLine("");
+
+    output.show(true);
+
 }
 
 function filterAnnotations(a,b){
