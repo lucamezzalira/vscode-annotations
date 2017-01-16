@@ -1,25 +1,35 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 var vscode = require('vscode');
-var RefactorAnnotation = require("./src/RefactorAnnotation");
-var refactorAnn;
+var Annotations = require("./src/Annotations");
+var annotations;
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 function activate(context) {
 
-    refactorAnn = new RefactorAnnotation();
-    var disposable = vscode.commands.registerCommand('extension.getRefactorAnnotation', function () {
-        refactorAnn.analyseDoc();
+    annotations = new Annotations();
+    var annotationsDisposable = vscode.commands.registerCommand('extension.getAnnotations', function () {
+        annotations.analyseDoc();
     });
 
-    context.subscriptions.push(disposable);
-    context.subscriptions.push(refactorAnn);
+    var allAnnotationsDisposable = vscode.commands.registerCommand('extension.getAllAnnotations', function () {
+        console.log("get all annotations in a project")
+    });
+
+    var annotationsOutputDisposable = vscode.commands.registerCommand('extension.createAnnotationsOutput', function () {
+       console.log("create output")
+    });
+
+    var annotationsWatcherDisposable = vscode.commands.registerCommand('extension.activateAnnotationsWatcher', function () {
+       console.log("activate annotations watcher")
+    });
+
+    context.subscriptions.push(annotationsDisposable);
+    context.subscriptions.push(annotationsOutputDisposable);
+    context.subscriptions.push(annotationsWatcherDisposable);
+    context.subscriptions.push(allAnnotationsDisposable);
+    context.subscriptions.push(annotations);
 }
 exports.activate = activate;
 
-// this method is called when your extension is deactivated
 function deactivate() {
-    refactorAnn.dispose();
+    annotations.dispose();
 }
 exports.deactivate = deactivate;

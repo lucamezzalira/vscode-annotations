@@ -7,7 +7,7 @@ var REFACTOR_ID = "refactor_id"
 var TODO_ID = "todo_id"
 var PANEL_NAME = "Annotations"
 
-function RefactorAnnotation(){
+function Annotations(){
      window = vscode.window;
 
     return {
@@ -26,7 +26,7 @@ function analyseDoc(){
         if(doc.languageId !== "javascript" || doc.fileName.toLowerCase().indexOf("untitled") >= 0){
             return
         }
-        
+      
         var reKeys = new RegExp(KEYS_REGEX, "gmi");
         var reSpaces = new RegExp(TRIM_SPACES_REGEX, "g");
         var line, result, finalOutput, i, annotationType;
@@ -107,10 +107,10 @@ function dispose(){
     output.dispose();
 }
 
-module.exports = RefactorAnnotation
+module.exports = Annotations
 
 
-//todo: apply doc analysis to all the files in a project
 //todo: bug with fixme annotation
-//todo: add vscode command: check all files, check file, export output
-//todo: change name extension
+//todo: create markdown output (check API MarkedString)
+//todo: create check on all files
+//todo: embeddare filesystemWatcher

@@ -1,9 +1,9 @@
 {
-    "name": "refactor-annotation",
-    "displayName": "refactor-annotation",
-    "description": "with this extension you will be able to annotate all the tech debt or part to refactor of your Javascript application",
+    "name": "vscode-annotations",
+    "displayName": "vscode-annotations",
+    "description": "with this extension you will be able to annotate all the tech debt or reafactor to do in your Javascript application",
     "version": "0.0.1",
-    "publisher": "lucamezzaliraa",
+    "publisher": "lucamezzalira",
     "engines": {
         "vscode": "^1.5.0"
     },
@@ -11,13 +11,25 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.getRefactorAnnotation"
+        "onCommand:extension.getAnnotations",
+        "onCommand:extension.getAllAnnotations",
+        "onCommand:extension.activateAnnotationsWatcher",
+        "onCommand:extension.createAnnotationsOutput"
     ],
     "main": "./extension",
     "contributes": {
         "commands": [{
-            "command": "extension.getRefactorAnnotation",
-            "title": "Refactor Annotation"
+            "command": "extension.getAnnotations",
+            "title": "ANNOTATIONS: check current file"
+        },{
+            "command": "extension.createAnnotationsOutput",
+            "title": "ANNOTATIONS: export markdown file"
+        },{
+            "command": "extension.getAllAnnotations",
+            "title": "ANNOTATIONS: check current project"
+        },{
+            "command": "extension.activateAnnotationsWatcher",
+            "title": "ANNOTATIONS: activate watcher"
         }]
     },
     "scripts": {
