@@ -5,6 +5,7 @@ var TRIM_SPACES_REGEX = "^[ ]+|[ ]+$"
 var FIXME_ID = "fixme_id"
 var REFACTOR_ID = "refactor_id"
 var TODO_ID = "todo_id"
+var PANEL_NAME = "Annotation"
 
 function RefactorAnnotation(){
      window = vscode.window;
@@ -17,7 +18,7 @@ function RefactorAnnotation(){
 
 function analyseDoc(){
     
-    output = window.createOutputChannel("RefactorAnnotation");
+    output = window.createOutputChannel(PANEL_NAME);
     output.show(true);
 
     var activeEditor = window.activeTextEditor
