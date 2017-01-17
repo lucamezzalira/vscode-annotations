@@ -7,6 +7,7 @@ function OutputPanel(){
 
     return{
         createOutputPanel: createOutputPanel,
+        createMarkdownFile: createMarkdownFile,
         dispose: dispose
     }
 
@@ -30,6 +31,10 @@ function createOutputPanel(doc, data){
     outputWin.appendLine("");
 
     outputWin.show(true);
+}
+
+function createMarkdownFile(doc, data){
+
 }
 
 function dispose(){

@@ -1,22 +1,20 @@
 var vscode = require('vscode');
+var OutputPanelVO = require('./OutputPanelVO');
 var window, output;
 var KEYS_REGEX = "(\/\/(TODO:|REFACTOR:|FIXME:))"
 var TRIM_SPACES_REGEX = "^[ ]+|[ ]+$"
 var FIXME_ID = "fixme_id"
 var REFACTOR_ID = "refactor_id"
-var TODO_ID = "todo_id"
-var outputPanel;
+var TODO_ID = "todo_id";
 
-function Annotations(panel){
-    outputPanel = panel;
-
+function Annotations(){
     return {
         analyseDoc: analyseDoc
     }
 }
 
 function analyseDoc(){
-    
+    var vo;
     var activeEditor = vscode.window.activeTextEditor
     
     if(activeEditor){
@@ -47,10 +45,10 @@ function analyseDoc(){
         }
         
         annotationsArr.sort(filterAnnotations)     
-        outputPanel.createOutputPanel(doc, annotationsArr);
-       
+        vo = new OutputPanelVO(doc, annotationsArr)
     }
 
+    return vo
 }
 
 function getAnnotationID(value){

@@ -5,9 +5,10 @@ var annotations, output;
 
 function activate(context) {
     output = new OutputPanel();
-    annotations = new Annotations(output);
+    annotations = new Annotations();
     var annotationsDisposable = vscode.commands.registerCommand('extension.getAnnotations', function () {
-        annotations.analyseDoc();
+        var vo = annotations.analyseDoc();
+        output.createOutputPanel(vo.doc, vo.data);
     });
 
     var allAnnotationsDisposable = vscode.commands.registerCommand('extension.getAllAnnotations', function () {
