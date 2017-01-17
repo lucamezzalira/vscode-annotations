@@ -1,47 +1,55 @@
 {
-    "name": "vscode-annotations",
-    "displayName": "vscode-annotations",
-    "description": "with this extension you will be able to annotate all the tech debt or reafactor to do in your Javascript application",
-    "version": "0.0.1",
-    "publisher": "lucamezzalira",
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onCommand:extension.getAnnotations",
-        "onCommand:extension.getAllAnnotations",
-        "onCommand:extension.activateAnnotationsWatcher",
-        "onCommand:extension.createAnnotationsOutput"
-    ],
-    "main": "./extension",
-    "contributes": {
-        "commands": [{
-            "command": "extension.getAnnotations",
-            "title": "ANNOTATIONS: check current file"
-        },{
-            "command": "extension.createAnnotationsOutput",
-            "title": "ANNOTATIONS: export markdown file"
-        },{
-            "command": "extension.getAllAnnotations",
-            "title": "ANNOTATIONS: check current project"
-        },{
-            "command": "extension.activateAnnotationsWatcher",
-            "title": "ANNOTATIONS: activate watcher"
-        }]
-    },
-    "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "eslint": "^3.6.0",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
-    }
+  "name": "vscode-annotations",
+  "displayName": "vscode-annotations",
+  "description": "with this extension you will be able to annotate all the tech debt or reafactor to do in your Javascript application",
+  "version": "0.0.1",
+  "publisher": "lucamezzalira",
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.getAnnotations",
+    "onCommand:extension.getAllAnnotations",
+    "onCommand:extension.activateAnnotationsWatcher",
+    "onCommand:extension.createAnnotationsOutput"
+  ],
+  "main": "./extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.getAnnotations",
+        "title": "ANNOTATIONS: check current file"
+      },
+      {
+        "command": "extension.createAnnotationsOutput",
+        "title": "ANNOTATIONS: export markdown file"
+      },
+      {
+        "command": "extension.getAllAnnotations",
+        "title": "ANNOTATIONS: check current project"
+      },
+      {
+        "command": "extension.activateAnnotationsWatcher",
+        "title": "ANNOTATIONS: activate watcher"
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.0",
+    "mocha": "^2.3.3",
+    "eslint": "^3.6.0",
+    "@types/node": "^6.0.40",
+    "@types/mocha": "^2.2.32"
+  },
+  "dependencies": {
+    "markdown": "^0.5.0"
+  }
 }

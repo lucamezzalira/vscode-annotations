@@ -39,12 +39,12 @@ function analyseDoc(){
                 
                 
                 annotationType = getAnnotationID(finalOutput.charAt(0).toLowerCase());              
-                annotationsArr.push({type: annotationType, content: `line ${i+1}: ${finalOutput}`})
+                annotationsArr.push({type: annotationType, content: finalOutput, line: i+1})
 
             }
         }
         
-        annotationsArr.sort(filterAnnotations)     
+        annotationsArr.sort(filterAnnotations);
         vo = new OutputPanelVO(doc, annotationsArr)
     }
 
@@ -80,7 +80,7 @@ function filterAnnotations(a,b){
 
 module.exports = Annotations
 
-
-//todo: create markdown output (check API MarkedString, vscode.workspace.rootPath + node for saving)
-//todo: create check on all files
-//todo: embeddare filesystemWatcher
+//todo: strip out action from comment
+//todo: changing formatting markdown and output panel
+//todo: create check on all project files
+//todo p2: embeddare filesystemWatcher
