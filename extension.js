@@ -15,6 +15,9 @@ function activate(context) {
 
     var annotationsOutputDisposable = vscode.commands.registerCommand('extension.createAnnotationsOutput', function () {
        console.log("create output")
+       vscode.window.activeTextEditor.edit(function(txtEditor){
+           txtEditor.insert(new vscode.Position(0, 0), "ciao")
+       })
     });
 
     var annotationsWatcherDisposable = vscode.commands.registerCommand('extension.activateAnnotationsWatcher', function () {

@@ -1,6 +1,6 @@
 var vscode = require('vscode');
 var window, output;
-var KEYS_REGEX = "(\/\/(REFACTOR:|FIXME:|TODO:))"
+var KEYS_REGEX = "(\/\/(TODO:|REFACTOR:|FIXME:))"
 var TRIM_SPACES_REGEX = "^[ ]+|[ ]+$"
 var FIXME_ID = "fixme_id"
 var REFACTOR_ID = "refactor_id"
@@ -35,7 +35,7 @@ function analyseDoc(){
 
         for(i = 0; i < totalLines; i++){
             line = doc.lineAt(i);
-            result = reKeys.exec(line.text)
+            result = line.text.match(reKeys);
             if(result){
                 finalOutput = line.text.replace(reSpaces, "")
                                        .substr(2, line.text.length);
@@ -110,7 +110,6 @@ function dispose(){
 module.exports = Annotations
 
 
-//todo: bug with fixme annotation
-//todo: create markdown output (check API MarkedString)
+//todo: create markdown output (check API MarkedString, vscode.workspace.rootPath + node for saving)
 //todo: create check on all files
 //todo: embeddare filesystemWatcher
