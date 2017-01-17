@@ -1,10 +1,11 @@
 var vscode = require('vscode');
 var Annotations = require("./src/Annotations");
-var annotations;
+var OutputPanel = require("./src/OutputPanel");
+var annotations, output;
 
 function activate(context) {
-
-    annotations = new Annotations();
+    output = new OutputPanel();
+    annotations = new Annotations(output);
     var annotationsDisposable = vscode.commands.registerCommand('extension.getAnnotations', function () {
         annotations.analyseDoc();
     });
@@ -33,6 +34,6 @@ function activate(context) {
 exports.activate = activate;
 
 function deactivate() {
-    annotations.dispose();
+    output.dispose();
 }
 exports.deactivate = deactivate;

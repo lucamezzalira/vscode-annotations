@@ -5,20 +5,19 @@ var TRIM_SPACES_REGEX = "^[ ]+|[ ]+$"
 var FIXME_ID = "fixme_id"
 var REFACTOR_ID = "refactor_id"
 var TODO_ID = "todo_id"
-var PANEL_NAME = "Annotations"
+var outputPanel;
 
-function Annotations(){
-     window = vscode.window;
+function Annotations(panel){
+    outputPanel = panel;
 
     return {
-        analyseDoc: analyseDoc,
-        dispose: dispose
+        analyseDoc: analyseDoc
     }
 }
 
 function analyseDoc(){
-    output = window.createOutputChannel(PANEL_NAME);
-    var activeEditor = window.activeTextEditor
+    
+    var activeEditor = vscode.window.activeTextEditor
     
     if(activeEditor){
         var doc = activeEditor.document;
@@ -48,7 +47,7 @@ function analyseDoc(){
         }
         
         annotationsArr.sort(filterAnnotations)     
-        createOutput(doc, annotationsArr, output);
+        outputPanel.createOutputPanel(doc, annotationsArr);
        
     }
 
@@ -72,27 +71,6 @@ function getAnnotationID(value){
     return type;
 }
 
-function createOutput(doc, data, panel){
-    var lastType = "";
-
-    panel.appendLine(`FILE -> file://${doc.fileName}`);
-    panel.appendLine("-----------------------------------------");
-
-    data.forEach(function(value, index, arr){
-        
-        if(value.type !== lastType && lastType !== "")
-            panel.appendLine("")
-        
-        panel.appendLine(value.content);
-        lastType = value.type
-    })
-    
-    panel.appendLine("");
-
-    output.show(true);
-
-}
-
 function filterAnnotations(a,b){
         if(a.type < b.type)
             return -1;
@@ -100,11 +78,6 @@ function filterAnnotations(a,b){
             return 1;
         else
             return 0;
-}
-
-function dispose(){
-    output.hide();
-    output.dispose();
 }
 
 module.exports = Annotations
