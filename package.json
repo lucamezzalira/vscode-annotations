@@ -13,7 +13,6 @@
   "activationEvents": [
     "onCommand:extension.getAnnotations",
     "onCommand:extension.getAllAnnotations",
-    "onCommand:extension.activateAnnotationsWatcher",
     "onCommand:extension.createAnnotationsOutput"
   ],
   "main": "./extension",
@@ -30,10 +29,6 @@
       {
         "command": "extension.getAllAnnotations",
         "title": "ANNOTATIONS: check current project"
-      },
-      {
-        "command": "extension.activateAnnotationsWatcher",
-        "title": "ANNOTATIONS: activate watcher"
       }
     ]
   },

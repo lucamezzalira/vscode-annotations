@@ -16,18 +16,13 @@ function activate(context) {
     });
 
     var annotationsOutputDisposable = vscode.commands.registerCommand('extension.createAnnotationsOutput', function () {
-       
         var vo = annotations.analyseDoc();
         output.createMarkdownFile(vo.doc, vo.data);
-
-       /*vscode.window.activeTextEditor.edit(function(txtEditor){
-           txtEditor.insert(new vscode.Position(0, 0), "ciao")
-        })*/
     });
 
-    var annotationsWatcherDisposable = vscode.commands.registerCommand('extension.activateAnnotationsWatcher', function () {
+    /*var annotationsWatcherDisposable = vscode.commands.registerCommand('extension.activateAnnotationsWatcher', function () {
        console.log("activate annotations watcher")
-    });
+    });*/
 
     context.subscriptions.push(annotationsDisposable);
     context.subscriptions.push(annotationsOutputDisposable);
