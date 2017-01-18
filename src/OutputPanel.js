@@ -1,14 +1,17 @@
 var vscode = require('vscode');
 var fs = require('fs');
+var AnnotationEnum = require('./AnnotationEnum');
 var outputWin_NAME = "Annotations";
 var ANNOTATIONS_FILE = '/vscode-annotations.md'
 var OUTPUT_PANEL_CONFIG = {
     newline: "\n",
-    list: "."
+    list: ".",
+    bold: ""
 };
 var MARKDOWN_CONFIG = {
     newline: "    \r",
-    list: "* "
+    list: "* ",
+    bold: "_"
 };
 var outputWin;
 
@@ -55,13 +58,12 @@ ${getBody(data, MARKDOWN_CONFIG)}
 }
 
 function getBody(data, config){
-    var lastType = "";
-    var str = "";
+    var lastType, str = "";
 
     data.forEach(function(value, index, arr){
         
-        if(value.type !== lastType && lastType !== "")
-            str += config.newline
+        if(value.type !== lastType)
+            str += config.newline + config.bold + getLabelPerAnnotationType(value.type) + config.bold + config.newline;
         
         str += config.list + value.content + " - line:" + value.line  + config.newline
      
@@ -69,6 +71,24 @@ function getBody(data, config){
     })
 
     return str
+}
+
+function getLabelPerAnnotationType(type){
+    var label;
+    switch(type){
+        case AnnotationEnum.FIXME_ID:
+        label = "FIXME:";
+        break;
+
+        case AnnotationEnum.REFACTOR_ID:
+        label = "REFACTOR:";
+        break;
+
+        case AnnotationEnum.TODO_ID:
+        label = "TODO:";
+        break
+    }
+    return label;
 }
 
 function dispose(){

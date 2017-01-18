@@ -1,6 +1,6 @@
 # vscode-annotation
 
-vscode-annotation is an extension for Visual Studio Code that will help you to add annotation in your code for identifying:
+vscode-annotation is an extension for Visual Studio Code that will help you to add annotation in your code for identifying:   
 . Refactor code   
 . Code to Fix    
 . To-do activities   

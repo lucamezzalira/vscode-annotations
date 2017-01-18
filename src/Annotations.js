@@ -1,11 +1,9 @@
 var vscode = require('vscode');
 var OutputPanelVO = require('./OutputPanelVO');
+var AnnotationEnum = require('./AnnotationEnum');
 var window, output;
 var KEYS_REGEX = "(\/\/(TODO:|REFACTOR:|FIXME:))"
-var TRIM_SPACES_REGEX = "^[ ]+|[ ]+$"
-var FIXME_ID = "fixme_id"
-var REFACTOR_ID = "refactor_id"
-var TODO_ID = "todo_id";
+var TRIM_SPACES_REGEX = "^[ ]+|[ ]+$";
 
 function Annotations(){
     return {
@@ -26,7 +24,7 @@ function analyseDoc(){
       
         var reKeys = new RegExp(KEYS_REGEX, "gmi");
         var reSpaces = new RegExp(TRIM_SPACES_REGEX, "g");
-        var line, result, finalOutput, i, annotationType;
+        var line, result, finalOutput, i, annotationType, initChar, annotationVO;
         var totalLines = doc.lineCount;
         var annotationsArr = [];
 
@@ -37,9 +35,10 @@ function analyseDoc(){
                 finalOutput = line.text.replace(reSpaces, "")
                                        .substr(2, line.text.length);
                 
-                
-                annotationType = getAnnotationID(finalOutput.charAt(0).toLowerCase());              
-                annotationsArr.push({type: annotationType, content: finalOutput, line: i+1})
+                annotationVO = getAnnotationVO(finalOutput.charAt(0).toLowerCase());
+                annotationType = annotationVO.type;
+                initChar = annotationVO.initChar;           
+                annotationsArr.push({type: annotationType, content: finalOutput.substr(initChar, finalOutput.length), line: i+1})
 
             }
         }
@@ -51,22 +50,28 @@ function analyseDoc(){
     return vo
 }
 
-function getAnnotationID(value){
-    var type;
+function getAnnotationVO(value){
+    var type, initChar;
     
     switch (value) {
         case "r":
-            type = REFACTOR_ID;
+            type = AnnotationEnum.REFACTOR_ID;
+            initChar = 10;
             break;
         case "f":
-            type = FIXME_ID;
+            type = AnnotationEnum.FIXME_ID;
+            initChar = 7;
             break;
-        default:
-            type = TODO_ID;
+        case "t":
+            type = AnnotationEnum.TODO_ID;
+            initChar = 6;
             break;
     }
 
-    return type;
+    return {
+        type: type,
+        initChar: initChar
+    }
 }
 
 function filterAnnotations(a,b){
@@ -80,7 +85,7 @@ function filterAnnotations(a,b){
 
 module.exports = Annotations
 
-//todo: strip out action from comment
-//todo: changing formatting markdown and output panel
 //todo: create check on all project files
+//todo: finish instructions on README file
+
 //todo p2: embeddare filesystemWatcher
