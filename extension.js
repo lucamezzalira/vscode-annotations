@@ -1,5 +1,6 @@
 var vscode = require('vscode');
 var Annotations = require("./src/Annotations");
+var ProjectAnnotations = require("./src/ProjectAnnotations");
 var OutputPanel = require("./src/OutputPanel");
 var annotations, output;
 
@@ -7,26 +8,34 @@ function activate(context) {
     output = new OutputPanel();
     annotations = new Annotations();
     var annotationsDisposable = vscode.commands.registerCommand('extension.getAnnotations', function () {
-        var vo = annotations.analyseDoc();
-        output.createOutputPanel(vo.doc, vo.data);
+        var activeEditor = vscode.window.activeTextEditor
+        if(activeEditor){
+            var vo = annotations.analyseDoc(activeEditor.document);
+            output.createOutputPanel(vo.doc, vo.data);
+        }
     });
 
     var allAnnotationsDisposable = vscode.commands.registerCommand('extension.getAllAnnotations', function () {
-        console.log("get all annotations in a project")
+        var projectAnnotations = new ProjectAnnotations();
+        projectAnnotations.analyseProject();
+        //todo: retrieve list of VOs and pass to the output panel
     });
 
     var annotationsOutputDisposable = vscode.commands.registerCommand('extension.createAnnotationsOutput', function () {
-        var vo = annotations.analyseDoc();
-        output.createMarkdownFile(vo.doc, vo.data);
+         var activeEditor = vscode.window.activeTextEditor
+         if(activeEditor){
+            var vo = annotations.analyseDoc(activeEditor.document);
+            output.createMarkdownFile(vo.doc, vo.data);
+         }
     });
 
     /*var annotationsWatcherDisposable = vscode.commands.registerCommand('extension.activateAnnotationsWatcher', function () {
        console.log("activate annotations watcher")
-    });*/
+    });
 
+    context.subscriptions.push(annotationsWatcherDisposable);*/
     context.subscriptions.push(annotationsDisposable);
     context.subscriptions.push(annotationsOutputDisposable);
-    context.subscriptions.push(annotationsWatcherDisposable);
     context.subscriptions.push(allAnnotationsDisposable);
     context.subscriptions.push(annotations);
     context.subscriptions.push(output);

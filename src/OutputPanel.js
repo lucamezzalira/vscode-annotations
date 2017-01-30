@@ -11,7 +11,7 @@ var OUTPUT_PANEL_CONFIG = {
 var MARKDOWN_CONFIG = {
     newline: "    \r",
     list: "* ",
-    bold: "_"
+    bold: "**"
 };
 var outputWin;
 

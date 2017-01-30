@@ -44,3 +44,7 @@ This extension contributes the following settings:
 Initial release of vscode-annotations.    
 . adding following annotations: `FIXME`, `REFACTOR` or `TODO`    
 . the extension will allow you to list the annotations in the "Annotations panel"    
+
+## Next Features   
+
+. adding fileswatcher API in order to run the check on files automatically
