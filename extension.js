@@ -17,8 +17,12 @@ function activate(context) {
 
     var allAnnotationsDisposable = vscode.commands.registerCommand('extension.getAllAnnotations', function () {
         var projectAnnotations = new ProjectAnnotations();
-        projectAnnotations.analyseProject();
-        //todo: retrieve list of VOs and pass to the output panel
+        var projPromise = projectAnnotations.analyseProject()
+                                            .then(docs => {
+                                                docs.forEach(vo => {
+                                                    output.createOutputPanel(vo.doc, vo.data);
+                                                })
+                                            })
     });
 
     var annotationsOutputDisposable = vscode.commands.registerCommand('extension.createAnnotationsOutput', function () {

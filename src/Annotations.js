@@ -12,7 +12,7 @@ function Annotations(){
 function analyseDoc(document){
     var doc = document;
 
-    if(doc.languageId !== "javascript" || doc.fileName.toLowerCase().indexOf("untitled") >= 0){
+    if(doc.languageId !== "javascript" || doc.isUntitled === true){
         return
     }
     
@@ -25,19 +25,20 @@ function analyseDoc(document){
     for(i = 0; i < totalLines; i++){
         line = doc.lineAt(i);
         result = line.text.match(reKeys);
+
         if(result){
             finalOutput = line.text.replace(reSpaces, "")
                                     .substr(2, line.text.length);
-            
+
             annotationVO = getAnnotationVO(finalOutput.charAt(0).toLowerCase());
             annotationType = annotationVO.type;
             initChar = annotationVO.initChar;           
             annotationsArr.push({type: annotationType, content: finalOutput.substr(initChar, finalOutput.length), line: i+1})
-
         }
     }
     
     annotationsArr.sort(filterAnnotations);
+
     return new OutputPanelVO(doc, annotationsArr)
 }
 

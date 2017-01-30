@@ -26,7 +26,8 @@ function testPromise() {
                 }, Math.random() * 2000 + 1000);
         }
     );
-
+    //todo: more info here
+    //todo: and here
     // We define what to do when the promise is resolved/fulfilled with the then() call,
     // and the catch() method defines what to do if the promise is rejected.
     p1.then(

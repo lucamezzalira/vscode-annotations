@@ -8,26 +8,34 @@ function ProjectAnnotations(){
 }
 
 function analyseProject(){
-   vscode.workspace.findFiles('*.js', '**∕@(node_modules|libs|vendors|output|public|dist)∕**').then(onFilesRetrieved)
-   //todo: review glob pattern for retrieving javascript files
+    return vscode.workspace.findFiles('**/*.js', '**∕@(node_modules|libs|vendors|output|public|dist)∕**')
+                          .then(onFilesRetrieved)
 }
 
 function onFilesRetrieved(files){
-    //todo: set promise
-    if(files.length < 1){
-        vscode.window.showInformationMessage('There aren\'t any javascript files in the open project!');
-        return;
-    }
-    var annotations = new Annotations();
-    var docsVO = [];
+        if(files.length < 1){
+            vscode.window.showInformationMessage('There aren\'t any javascript files in the open project!');
+            return;
+        }
 
-    files.forEach(function(file){
-         vscode.workspace.openTextDocument(file.path).then(value => {        
-             docsVO.push(annotations.analyseDoc(value));
-         })
-    })
+        var annotations = new Annotations();
+        var docsPromises = [];
 
-    return docsVO;
+        files.forEach(file => {
+            docsPromises.push(vscode.workspace.openTextDocument(file.path))
+        })
+
+        return Promise.all(docsPromises).then(docs => {
+            var docsVO = [];
+            
+            docs.forEach(doc => {
+                var vo = annotations.analyseDoc(doc);     
+                docsVO.push(vo);
+            })
+
+            return docsVO;
+        })
+
 }
 
 module.exports = ProjectAnnotations;
