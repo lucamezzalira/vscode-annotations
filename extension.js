@@ -17,20 +17,20 @@ function activate(context) {
 
     var allAnnotationsDisposable = vscode.commands.registerCommand('extension.getAllAnnotations', function () {
         var projectAnnotations = new ProjectAnnotations();
-        var projPromise = projectAnnotations.analyseProject()
-                                            .then(docs => {
-                                                docs.forEach(vo => {
-                                                    output.createOutputPanel(vo.doc, vo.data);
+        projectAnnotations.analyseProject().then(docs => {
+                                                    docs.forEach(vo => {
+                                                        output.createOutputPanel(vo.doc, vo.data);
+                                                    })
                                                 })
-                                            })
     });
 
     var annotationsOutputDisposable = vscode.commands.registerCommand('extension.createAnnotationsOutput', function () {
-         var activeEditor = vscode.window.activeTextEditor
-         if(activeEditor){
-            var vo = annotations.analyseDoc(activeEditor.document);
-            output.createMarkdownFile(vo.doc, vo.data);
-         }
+        var projectAnnotations = new ProjectAnnotations();
+        projectAnnotations.analyseProject().then(docs => {
+                                                    docs.forEach(vo => {
+                                                        output.createMarkdownFile(vo.doc, vo.data);
+                                                    })
+                                                })
     });
 
     /*var annotationsWatcherDisposable = vscode.commands.registerCommand('extension.activateAnnotationsWatcher', function () {
@@ -44,9 +44,11 @@ function activate(context) {
     context.subscriptions.push(annotations);
     context.subscriptions.push(output);
 }
+
 exports.activate = activate;
 
 function deactivate() {
     output.dispose();
 }
+
 exports.deactivate = deactivate;
