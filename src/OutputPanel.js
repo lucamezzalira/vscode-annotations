@@ -43,7 +43,8 @@ function createMarkdownFile(docs){
     var md = "";
     docs.forEach(file => {
         if(file.data.length > 0){
-            md += getMarkdown(file.doc.fileName, file.data)
+            var filename = file.doc.uri.path.replace(vscode.workspace.rootPath,"");
+            md += getMarkdown(filename.substr(1, filename.length), file.data)
         }
     })
    
