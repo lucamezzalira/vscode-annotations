@@ -44,7 +44,7 @@ Please install the annotations extension via the extensions panel in Visual Stud
 
 ## Release Notes
 
-### __0.1.5__
+### __0.1.6__
 
 . fix bug on check project folder    
 . fix bug on export markdown file    
