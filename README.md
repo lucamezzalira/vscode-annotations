@@ -44,7 +44,7 @@ Please install the annotations extension via the extensions panel in Visual Stud
 
 ## Release Notes
 
-### 1.0.0
+### 0.1.0
 
 Initial release of vscode-annotations.    
 . adding following annotations: `FIXME`, `REFACTOR` or `TODO`    
