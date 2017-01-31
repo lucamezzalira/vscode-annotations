@@ -8,8 +8,8 @@ function ProjectAnnotations(){
 }
 
 function analyseProject(){
-    return vscode.workspace.findFiles('**/*.js', '**∕@(node_modules|libs|vendors|output|public|dist)∕**')
-                          .then(onFilesRetrieved)
+    return vscode.workspace.findFiles('**/*.js', '**/node_modules/**', 1000)
+                           .then(onFilesRetrieved)
 }
 
 function onFilesRetrieved(files){

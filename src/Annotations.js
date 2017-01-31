@@ -1,3 +1,4 @@
+var vscode = require('vscode');
 var OutputPanelVO = require('./OutputPanelVO');
 var AnnotationEnum = require('./AnnotationEnum');
 var KEYS_REGEX = "(\/\/(TODO:|REFACTOR:|FIXME:))"
@@ -13,6 +14,7 @@ function analyseDoc(document){
     var doc = document;
 
     if(doc.languageId !== "javascript" || doc.isUntitled === true){
+        vscode.window.showErrorMessage('This is not a Javascript file or this file is not saved');
         return
     }
     

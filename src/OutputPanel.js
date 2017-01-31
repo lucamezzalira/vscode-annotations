@@ -27,15 +27,16 @@ function OutputPanel(){
 }
 
 function createOutputPanel(doc, data){
+    if(data.length > 0){
+        outputWin.appendLine(`FILE -> file://${doc.fileName}`);
+        outputWin.appendLine("-----------------------------------------");
 
-    outputWin.appendLine(`FILE -> file://${doc.fileName}`);
-    outputWin.appendLine("-----------------------------------------");
+        outputWin.appendLine(getBody(data, OUTPUT_PANEL_CONFIG))
+        
+        outputWin.appendLine(OUTPUT_PANEL_CONFIG.newline);
 
-    outputWin.appendLine(getBody(data, OUTPUT_PANEL_CONFIG))
-    
-    outputWin.appendLine(OUTPUT_PANEL_CONFIG.newline);
-
-    outputWin.show(true);
+        outputWin.show(true);
+    }
 }
 
 function createMarkdownFile(doc, data){
