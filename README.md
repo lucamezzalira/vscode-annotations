@@ -53,4 +53,8 @@ Initial release of vscode-annotations.
 ## Next Features   
 
 . adding fileswatcher API in order to run the check on files automatically
-. exporting annotations directly to README file 
+. exporting annotations directly to README file   
+
+## Suggestion
+
+For a better readability I suggest to install, in combination with vscode-annotations, the IBM output panel colorful extension: https://marketplace.visualstudio.com/items?itemName=IBM.output-colorizer
