@@ -27,9 +27,11 @@ function testPromise() {
         }
     );
     //todo: more info here
-    //todo: and here
+    //todo: invisible to do
     // We define what to do when the promise is resolved/fulfilled with the then() call,
     // and the catch() method defines what to do if the promise is rejected.
+  
+    //todo: and here
     p1.then(
         // Log the fulfillment value
         function(val) {
