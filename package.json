@@ -1,8 +1,8 @@
 {
   "name": "vscode-annotations",
   "displayName": "vscode-annotations",
-  "description": "with this extension you will be able to annotate all the tech debt or reafactor to do in your Javascript application",
-  "version": "0.0.1",
+  "description": "with this extension you will be able to annotate all the tech debt or reafactor to do in your Javascript applications",
+  "version": "0.1.0",
   "publisher": "lucamezzalira",
   "engines": {
     "vscode": "^1.5.0"
