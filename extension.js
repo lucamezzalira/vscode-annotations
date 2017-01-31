@@ -26,11 +26,7 @@ function activate(context) {
 
     var annotationsOutputDisposable = vscode.commands.registerCommand('extension.createAnnotationsOutput', function () {
         var projectAnnotations = new ProjectAnnotations();
-        projectAnnotations.analyseProject().then(docs => {
-                                                    docs.forEach(vo => {
-                                                        output.createMarkdownFile(vo.doc, vo.data);
-                                                    })
-                                                })
+        projectAnnotations.analyseProject().then(docs => output.createMarkdownFile(docs))
     });
 
     /*var annotationsWatcherDisposable = vscode.commands.registerCommand('extension.activateAnnotationsWatcher', function () {

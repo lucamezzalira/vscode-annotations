@@ -39,8 +39,14 @@ function createOutputPanel(doc, data){
     }
 }
 
-function createMarkdownFile(doc, data){
-    var md = getMarkdown(doc.fileName, data);
+function createMarkdownFile(docs){
+    var md = "";
+    docs.forEach(file => {
+        if(file.data.length > 0){
+            md += getMarkdown(file.doc.fileName, file.data)
+        }
+    })
+   
     var path = vscode.workspace.rootPath + ANNOTATIONS_FILE
     fs.writeFile(path, md, (err) => {
         if (err){
