@@ -44,6 +44,12 @@ Please install the annotations extension via the extensions panel in Visual Stud
 
 ## Release Notes
 
+### 0.1.4
+
+. fix bug on check project folder    
+. fix bug on export markdown file    
+. improve markdown file readability
+
 ### 0.1.0
 
 Initial release of vscode-annotations.    
